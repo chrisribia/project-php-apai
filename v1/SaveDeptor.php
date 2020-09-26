@@ -7,19 +7,19 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $db = new DbOperations;
 
     if (
-        isset($_POST['email']) AND  isset($_POST['username']) AND  isset($_POST['password']) )
+        isset($_POST['name']) AND  isset($_POST['tel']) AND  isset($_POST['amount']) AND isset($_POST['date']))
          {
-            $isUser = $db->isUserAvailable($_POST['username']);
+            $isUser = $db->isDebtorAvailable($_POST['name']);
             if($isUser ){
                 $response_data = array();
                 $response_data['error'] = true; 
-                $response_data['message'] =  $_POST['username']. " Already exists, please choose another one"  ;
+                $response_data['message'] =  $_POST['name']. " Already exists, please choose another one"  ;
             }else{
-                $saveRespose = $db->userRegistration($_POST['email'],$_POST['username'],$_POST['password']);
+                $saveRespose = $db->addDebtor($_POST['name'],$_POST['tel'],$_POST['amount'],$_POST['date']);
                 $response_data = array();
                 $response_data['error'] = false; 
                 $response_data['message'] = "success"; 
-                $response_data['user'] = $_POST['username'];         
+                $response_data['debtor'] = $_POST['name'];         
 
             }
          }
