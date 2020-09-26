@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if (
         isset($_POST['email']) AND  isset($_POST['username']) AND  isset($_POST['password']) )
          {
-            $isUser = $db->isUserAvailable($_POST['username']);
+            $isUser = $db->isUserAvailable($_POST['username'],$_POST['password']);
             if($isUser ){
                 $response_data = array();
                 $response_data['error'] = true; 
